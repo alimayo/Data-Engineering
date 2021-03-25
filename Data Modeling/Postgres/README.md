@@ -33,7 +33,7 @@ For example,
 >df = pd.read_json('data/log_data/2018/11/2018-11-01-events.json', lines=True) would read the data file 2018-11-01-events.json.
 
 
-
+#### The dataset is provided in data.zip, unzip it in the folder where other project files are present.
 
 
 ## Project Files
