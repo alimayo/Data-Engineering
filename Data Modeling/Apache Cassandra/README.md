@@ -33,7 +33,7 @@ CSV file  <font color=red>event_datafile_new.csv</font>, located within the Work
 
 The image below is a screenshot of what the denormalized data should appear like in the <font color=red>**event_datafile_new.csv**</font> after the code above is run:<br>
 
-![alt data image]<img src="images/image_event_datafile_new.jpg">
+![alt data image]<https://github.com/alimayo/Udacity---Data-Engineering/blob/main/Data%20Modeling/Apache%20Cassandra/image_event_datafile_new.jpg?raw=true>
 
 ## Table Design
 
