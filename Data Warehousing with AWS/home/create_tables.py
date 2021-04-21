@@ -4,18 +4,28 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
+    """
+    Drops the tables if already exists
+    """
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """
+    Creates the tables 
+    """
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def main():
+    """
+    Connects the program to postgres on the AWS Redshift cluster
+    Calls drop and create table functions
+    """
     config = configparser.ConfigParser()
     config.read('dwh.cfg')
 
