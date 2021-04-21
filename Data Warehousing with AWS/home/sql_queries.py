@@ -10,9 +10,9 @@ config.read('dwh.cfg')
 staging_events_table_drop = "DROP TABLE IF EXISTS staging_events"
 staging_songs_table_drop = "DROP TABLE IF EXISTS staging_songs"
 songplay_table_drop = "DROP TABLE IF EXISTS songplay"
-user_table_drop = "DROP TABLE IF EXISTS user"
-song_table_drop = "DROP TABLE IF EXISTS song"
-artist_table_drop = "DROP TABLE IF EXISTS artist"
+user_table_drop = "DROP TABLE IF EXISTS users"
+song_table_drop = "DROP TABLE IF EXISTS songs"
+artist_table_drop = "DROP TABLE IF EXISTS artists"
 time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
@@ -55,7 +55,7 @@ staging_songs_table_create = ("""CREATE TABLE staging_songs
                                 )
                                 """)
 
-songplay_table_create = ("""CREATE TABLE songplay
+songplay_table_create = ("""CREATE TABLE songplays
                             (
                             songplay_id IDENTITY(0,1) primary key, 
                             start_time timestamp not null distkey, 
@@ -69,7 +69,7 @@ songplay_table_create = ("""CREATE TABLE songplay
                             )
                             """)
 
-user_table_create = ("""CREATE TABLE user
+user_table_create = ("""CREATE TABLE users
                         (
                         user_id int primary key sortkey, 
                         first_name varchar not null, 
@@ -79,7 +79,7 @@ user_table_create = ("""CREATE TABLE user
                         ) diststyle all;
                         """)
 
-song_table_create = ("""CREATE TABLE song
+song_table_create = ("""CREATE TABLE songs
                         (
                         song_id varchar primary key sortkey, 
                         title varchar, 
@@ -89,7 +89,7 @@ song_table_create = ("""CREATE TABLE song
                         ) diststyle all;
                         """)
 
-artist_table_create = ("""CREATE TABLE artist
+artist_table_create = ("""CREATE TABLE artists
                             (
                             artist_id varchar primary key sortkey, 
                             name varchar, 
@@ -121,7 +121,7 @@ staging_events_copy = ("""
                         TIMEFORMAT as 'epochmillisecs';
                         """).format(config.get("S3","LOG_DATA"), config.get("IAM_ROLE","ARN"), config.get("S3","LOG_JSONPATH"))
 
-staging_songs_copy = ("""COPY staging_events from {}
+staging_songs_copy = ("""COPY staging_songs from {}
                         credentials 'aws_iam_role={}'
                         gzip region 'us-east-1'
                         FORMAT as JSON 'auto';
