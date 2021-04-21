@@ -62,5 +62,5 @@ Accesses the S3 to retrieve the data and insert into staging tables on Redshift.
 ## To RUN Project
 
 1. Input the credentials to access your AWS redshift cluster in dwh.cfg
-2. Run createtables.py 
+2. Run create_tables.py 
 3. Run etl.py
