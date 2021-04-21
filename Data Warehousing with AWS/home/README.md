@@ -47,3 +47,10 @@ Using the song and event datasets,I have created a star schema optimized for que
 > artist_id, name, location, lattitude, longitude
 #### time - timestamps of records in songplays broken down into specific units
 > start_time, hour, day, week, month, year, weekday
+
+
+## To RUN Project
+
+1. Input the credentials to access your AWS redshift cluster in dwh.cfg
+2. Run createtables.py 
+3. Run etl.py
