@@ -55,9 +55,9 @@ Access details for the AWS Cluster
 ### sqlqueries.py: 
 All the sql queries including drop,creation, and insertion are declared here
 ### createtables.py: 
-Accesses Redshift Cluster and creates the staging, facts and dimesnion tables
+Accesses Redshift Cluster and creates the staging, facts and dimension tables
 ### etl.py: 
-Accesses the S3 to retrieve the data and insert into staging tables on Redshift. From Staging tables data is inserted into facts and dimesion tables on Redshift.
+Accesses the S3 to retrieve the data and insert into staging tables on Redshift. From Staging tables data is inserted into facts and dimension tables on Redshift.
 
 ## To RUN Project
 
