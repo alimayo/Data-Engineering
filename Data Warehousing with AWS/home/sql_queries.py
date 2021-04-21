@@ -21,22 +21,22 @@ staging_events_table_create= ("""CREATE TABLE staging_events
                                 (
                                 artist          VARCHAR,
                                 auth            VARCHAR, 
-                                firstName       VARCHAR,
+                                first_name      VARCHAR,
                                 gender          VARCHAR,   
-                                itemInSession   INTEGER,
-                                lastName        VARCHAR,
+                                item_in_session INTEGER,
+                                last_name       VARCHAR,
                                 length          FLOAT,
                                 level           VARCHAR, 
                                 location        VARCHAR,
                                 method          VARCHAR,
                                 page            VARCHAR,
                                 registration    BIGINT,
-                                sessionId       INTEGER,
+                                session_id      INTEGER,
                                 song            VARCHAR,
                                 status          INTEGER,
                                 ts              TIMESTAMP,
-                                userAgent       VARCHAR,
-                                userId          INTEGER
+                                user_agent      VARCHAR,
+                                user_id         INTEGER
                                 );
                                 """)
 
@@ -65,8 +65,8 @@ songplay_table_create = ("""CREATE TABLE songplays
                             artist_id varchar,
                             session_id int not null, 
                             location varchar, 
-                            user_agent varchar not null;
-                            )
+                            user_agent varchar not null
+                            );
                             """)
 
 user_table_create = ("""CREATE TABLE users
@@ -115,30 +115,30 @@ time_table_create = ("""CREATE TABLE time
 
 staging_events_copy = (""" 
                         COPY staging_events from {}
-                        credentials 'aws_iam_role={}'
-                        gzip region 'us-east-1'
-                        FORMAT as JSON {}
+                        iam_role {}
+                        region 'us-west-2'
+                        FORMAT as json {}
                         TIMEFORMAT as 'epochmillisecs';
-                        """).format(config.get("S3","LOG_DATA"), config.get("IAM_ROLE","ARN"), config.get("S3","LOG_JSONPATH"))
+                        """).format(config.get('S3','LOG_DATA'), config.get('IAM_ROLE','ARN'), config.get('S3','LOG_JSONPATH'))
 
 staging_songs_copy = ("""COPY staging_songs from {}
-                        credentials 'aws_iam_role={}'
-                        gzip region 'us-east-1'
-                        FORMAT as JSON 'auto';
-                        """).format(config.get("S3","SONG_DATA"), config.get("IAM_ROLE","ARN"))
+                        iam_role {}
+                        region 'us-west-2'
+                        FORMAT as json 'auto';
+                        """).format(config.get('S3','SONG_DATA'), config.get('IAM_ROLE','ARN'))
 
 
 # FINAL TABLES
 
 songplay_table_insert = ("""INSERT INTO songplays (start_time, user_id , level , song_id , artist_id, session_id, location, user_agent)
                         SELECT DISTINCT(ts) as start_time, 
-                               se.userId                                as user_id,
+                               se.user_id                                as user_id,
                                se.level                                 as level,
                                ss.song_id                               as song_id,
                                ss.artist_id                             as artist_id,
-                               se.sessionId                             as session_id,
+                               se.session_id                            as session_id,
                                se.location                              as location,
-                               se.userAgent                             as user_agent
+                               se.user_agent                             as user_agent
                         FROM staging_events se
                         JOIN staging_songs ss ON (se.artist = ss.artist_name AND se.song = ss.title)
                         WHERE se.page = 'NextSong' and ts IS NOT NULL;""")
@@ -177,7 +177,7 @@ time_table_insert = ("""INSERT INTO time (start_time, hour, day, week, month, ye
                                EXTRACT(week FROM ts)                       AS week,
                                EXTRACT(month FROM ts)                      AS month,
                                EXTRACT(year FROM ts)                       AS year,
-                               EXTRACT(weekday FROM ts)                    AS weekday,
+                               EXTRACT(weekday FROM ts)                    AS weekday
                         FROM staging_events
                         WHERE ts IS NOT NULL;""")
 
