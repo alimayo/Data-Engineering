@@ -52,7 +52,7 @@ staging_songs_table_create = ("""CREATE TABLE staging_songs
                                 artist_id          VARCHAR,
                                 artist_longitude   FLOAT,
                                 artist_location    VARCHAR
-                                )
+                                );
                                 """)
 
 songplay_table_create = ("""CREATE TABLE songplays
@@ -108,7 +108,7 @@ time_table_create = ("""CREATE TABLE time
                         month int, 
                         year int, 
                         weekday int
-                        )
+                        );
                     """)
 
 # STAGING TABLES
