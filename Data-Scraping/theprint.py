@@ -3,9 +3,7 @@ from datetime import date
 import datetime
 import requests
 import re
-import os
 
-from time import sleep
 today = date.today()
 f1="%d %B, %Y %I:%M "
 f2=" %d %B, %Y %I:%M "

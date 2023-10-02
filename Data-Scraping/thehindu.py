@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-"""TheHindu_WebScraper_final.ipynb
-"""
 # importing the necessary packages
 import requests
 from bs4 import BeautifulSoup

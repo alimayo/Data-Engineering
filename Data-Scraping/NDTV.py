@@ -1,8 +1,6 @@
 import requests 
 from bs4 import BeautifulSoup 
 from datetime import datetime
-import time 
-import sys
 import re
 today=datetime.today()
 url = 'https://www.ndtv.com'
